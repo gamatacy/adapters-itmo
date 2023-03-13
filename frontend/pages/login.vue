@@ -4,21 +4,33 @@
       <div class="d-flex justify-content-center mb-4 pb-3">
         <img src="/images/logo.png" height="50" alt="Adapters logo">
       </div>
-      <b-form class="bg-white rounded py-4 px-4 px-lg-5 mb-4">
+      <b-form class="bg-white rounded py-4 px-4 px-lg-5 mb-4" novalidate @submit="submitForm">
         <div class="text-center text-primary h3 mb-4">
           Войти в систему
         </div>
 
-        <b-form-input
-          placeholder="Электронная почта"
-          class="mb-3"
-        />
+        <div class="mb-3">
+          <b-form-input
+            v-model="form.email"
+            placeholder="Электронная почта"
+            :class="{'is-invalid':!validationEmail}"
+          />
+          <b-form-invalid-feedback :state="validationEmail">
+            Обязательно
+          </b-form-invalid-feedback>
+        </div>
 
-        <b-form-input
-          type="password"
-          placeholder="Пароль"
-          class="mb-3 pb-2"
-        />
+        <div class="mb-3">
+          <b-form-input
+            v-model="form.password"
+            type="password"
+            placeholder="Пароль"
+            :class="{'is-invalid':!validationPassword}"
+          />
+          <b-form-invalid-feedback :state="validationPassword">
+            Минимум 12 символов
+          </b-form-invalid-feedback>
+        </div>
 
         <div>
           Забыли пароль?
@@ -27,7 +39,7 @@
           </nuxt-link>
         </div>
         <div class="d-flex justify-content-center mt-4">
-          <b-button variant="primary">
+          <b-button type="submit" variant="primary" :disabled="loading">
             Вход
           </b-button>
         </div>
@@ -45,7 +57,39 @@
 <script>
 export default {
   name: 'LoginPage',
-  layout: 'empty'
+
+  layout: 'empty',
+
+  data: () => ({
+    form: {
+      email: null,
+      password: null
+    },
+    isTouchedBtn: false,
+    loading: false
+  }),
+
+  computed: {
+    validationPassword () {
+      return !this.isTouchedBtn || this.form.password?.length >= 12
+    },
+    validationEmail () {
+      return !this.isTouchedBtn || !!this.form.email
+    }
+  },
+
+  methods: {
+    submitForm (e) {
+      e.preventDefault()
+      this.isTouchedBtn = true
+      if (!this.validationPassword || !this.validationEmail) {
+        return
+      }
+      this.loading = true
+      //
+      this.loading = false
+    }
+  }
 }
 </script>
 

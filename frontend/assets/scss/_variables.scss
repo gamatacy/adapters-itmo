@@ -1,0 +1,14 @@
+$body-bg: #F1F1F1;
+$body-color: #2A2A2A;
+$primary: #64B5FF;
+$primary-light: #7CC0FF;
+$danger: #F32B2B;
+$light: #F1F1F1;
+
+$border-radius: 10px;
+
+
+// Bootstrap and its default variables
+@import '../../node_modules/bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables
+@import '../../node_modules/bootstrap-vue/src/index';

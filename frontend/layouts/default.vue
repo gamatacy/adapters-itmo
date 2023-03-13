@@ -1,22 +1,23 @@
 <template>
-  <b-container style="height: 100vh">
+  <div>
     <TheHeader />
-    <Nuxt />
-  </b-container>
+    <TheSidebar />
+    <b-container>
+      <Nuxt />
+    </b-container>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'DefaultLayout',
+
   components: {
+    TheSidebar: () => import('../components/application/TheSidebar'),
     TheHeader: () => import('../components/application/TheHeader')
-  },
-  methods: {}
+  }
 }
 </script>
 
 <style>
-body {
-  background: #F1F1F1;
-}
 </style>
