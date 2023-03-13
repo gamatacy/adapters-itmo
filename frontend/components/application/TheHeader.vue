@@ -80,35 +80,4 @@ export default {
     padding: 0;
   }
 }
-
-.navbar .nav-item, .b-sidebar .nav-item {
-  &.not-collapsed, &.show {
-    svg {
-      transform: rotate(180deg);
-    }
-  }
-
-  svg {
-    transition: transform .2s ease-in-out;
-    margin-top: 4px;
-    margin-left: 4px;
-  }
-
-  .nuxt-link-active, .nav-link.active {
-    text-shadow: .25px 0 .1px, -.25px 0px .1px;
-  }
-
-  .nav-link {
-    outline: none;
-    color: var(--dark);
-    padding: 0.5rem 0;
-    transition: all .2s ease-in-out;
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      color: var(--primary);
-    }
-  }
-}
 </style>

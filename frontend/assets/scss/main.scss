@@ -6,3 +6,63 @@
     color: white;
   }
 }
+
+.navbar .nav-item, .b-sidebar .nav-item {
+  &.not-collapsed, &.show {
+    .nav-link {
+      color: var(--primary);
+    }
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  svg {
+    transition: transform .2s ease-in-out;
+    margin-top: 4px;
+    margin-left: 4px;
+  }
+
+  .nuxt-link-active, .nav-link.active {
+    text-shadow: .25px 0 .1px, -.25px 0px .1px;
+  }
+
+  .nav-link {
+    outline: none;
+    color: var(--dark);
+    padding: 0.5rem 0;
+    transition: all .2s ease-in-out;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+html .dropdown-menu {
+  padding: 0;
+
+  li:not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  }
+
+  li:first-of-type a {
+    border-radius: 10px 10px 0 0;
+  }
+
+  li:last-of-type a {
+    border-radius: 0 0 10px 10px;
+  }
+
+  a:focus {
+    color: inherit;
+    background: inherit;
+  }
+
+  a:hover {
+    background: rgba(124, 192, 255, 0.2);
+  }
+}
