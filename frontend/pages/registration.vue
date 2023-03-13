@@ -127,7 +127,7 @@ export default {
       return !this.isTouchedBtn || this.form.passwordConfirm?.length >= 12
     },
     validationPasswordConfirm () {
-      return !this.isTouchedBtn || this.form.passwordConfirm?.length < 12 || this.form.password === this.form.passwordConfirm
+      return !this.isTouchedBtn || !(this.form.passwordConfirm?.length >= 12) || this.form.password === this.form.passwordConfirm
     },
     validationEmail () {
       return !this.isTouchedBtn || !!this.form.email
@@ -138,8 +138,8 @@ export default {
     submitForm (e) {
       e.preventDefault()
       this.isTouchedBtn = true
-      if (!this.validationPassword || !this.validationEmail || !this.validationPasswordConfirm ||
-        !this.validationFirstName || !this.validationLastName) {
+      if (!this.validationPassword || !this.validationEmail || !this.validationPasswordConfirmRequired ||
+        !this.validationPasswordConfirm || !this.validationFirstName || !this.validationLastName) {
         return
       }
       this.loading = true
