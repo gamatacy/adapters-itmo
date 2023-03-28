@@ -1,4 +1,4 @@
-package com.gamatacy.entity
+package com.gamatacy.backend.entity
 
 import com.gamatacy.enum.UserRole
 import jakarta.persistence.Entity

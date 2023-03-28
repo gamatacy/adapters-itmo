@@ -38,6 +38,7 @@ class JwtFilter: OncePerRequestFilter() {
 
                 authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = authToken
+
             }else if (jwt.isNotEmpty()){
                 SecurityContextHolder.clearContext()
             }
