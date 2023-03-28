@@ -1,11 +1,15 @@
-package com.gamatacy.service
+package com.gamatacy.backend.service
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureAlgorithm
+import jakarta.servlet.http.HttpServletRequest
+import java.util.*
 
 @Service
 class JwtService {
-/*
+
     @Value("\${jwt.key}")
     lateinit var jwtKey: String
 
@@ -14,6 +18,7 @@ class JwtService {
 
     @Value("\${jwt.refreshExpiration}")
     lateinit var refreshExpiration: Integer
+
 
     fun generateAccessToken(username: String): String{
         return generateToken(username, Date(Date().time + expiration.toLong()))
@@ -57,6 +62,13 @@ class JwtService {
             .parseClaimsJws(token)
             .body
             .subject
-    }*/
+    }
+    fun getRoles(token: String): String{
+        return Jwts.parser()
+            .setSigningKey(jwtKey)
+            .parseClaimsJws(token)
+            .body
+            .subject
+    }
 
 }

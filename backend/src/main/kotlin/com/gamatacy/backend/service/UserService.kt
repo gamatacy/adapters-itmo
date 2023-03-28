@@ -1,7 +1,9 @@
-package com.gamatacy.service
+package com.gamatacy.backend.service
 
 import com.gamatacy.entity.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
@@ -15,7 +17,10 @@ class UserService: UserDetailsService {
 
     override fun loadUserByUsername(username: String?): UserDetails {
         val user = userRepository.findByUsername(username.toString())
-        return User(user?.username, user?.password, mutableListOf())
+        val grantedAuthorities: MutableCollection<GrantedAuthority> = mutableListOf()
+        return User(user?.username, user?.password,
+            user?.role?.mapTo(grantedAuthorities) { SimpleGrantedAuthority(it.toString()) }
+            )
     }
 
 }
