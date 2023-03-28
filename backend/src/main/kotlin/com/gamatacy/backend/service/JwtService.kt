@@ -1,5 +1,6 @@
 package com.gamatacy.backend.service
 
+import com.gamatacy.enum.UserRole
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import io.jsonwebtoken.Jwts
@@ -57,13 +58,6 @@ class JwtService {
     }
 
     fun getUsername(token: String): String{
-        return Jwts.parser()
-            .setSigningKey(jwtKey)
-            .parseClaimsJws(token)
-            .body
-            .subject
-    }
-    fun getRoles(token: String): String{
         return Jwts.parser()
             .setSigningKey(jwtKey)
             .parseClaimsJws(token)
