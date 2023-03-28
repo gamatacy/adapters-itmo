@@ -13,7 +13,7 @@
       <b-nav vertical>
         <template v-for="(navItem,i) in nav">
           <div v-if="navItem.type===1" :key="i">
-            <b-nav-item v-b-toggle="'collapse-'+i" :active="navItem.items.find(item=>item.link===$route.path)">
+            <b-nav-item v-b-toggle="'collapse-'+i" :active="!!navItem.items.find(item=>item.link===$route.path)">
               {{ navItem.name }}
               <b-icon icon="chevron-down" font-scale=".75" />
             </b-nav-item>

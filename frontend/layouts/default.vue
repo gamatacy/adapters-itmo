@@ -2,8 +2,10 @@
   <div>
     <TheHeader />
     <TheSidebar />
-    <b-container>
-      <Nuxt />
+    <b-container class="mt-3 px-2 px-lg-0">
+      <div class="bg-white rounded p-2 px-3 p-lg-4 px-lg-5">
+        <Nuxt />
+      </div>
     </b-container>
   </div>
 </template>

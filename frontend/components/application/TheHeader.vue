@@ -64,8 +64,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables";
-
 .navbar-container {
   position: sticky;
   top: 0;
