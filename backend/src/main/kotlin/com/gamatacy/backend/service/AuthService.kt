@@ -52,7 +52,7 @@ class AuthenticationService {
         return try {
             userRepository.save(userEntity)
             ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(AccessTokenResponseDto(accessToken))
+                .body(AuthenticationResponseDto("Successful registration", accessToken))
         } catch (e: Exception) {
             println(e.message)
             ResponseEntity.status(403).body("Server side problems")
@@ -93,7 +93,7 @@ class AuthenticationService {
                     .maxAge(60 * 60 * 24 * 7)
                     .build()
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(AccessTokenResponseDto(jwtService.generateAccessToken(jwtService.getUsername(oldCookie))))
+                .body(AuthenticationResponseDto("Token refreshed",jwtService.generateAccessToken(jwtService.getUsername(oldCookie))))
         }
 
         return ResponseEntity.status(403).body("Token Expired")
@@ -108,7 +108,7 @@ class AuthenticationService {
                 .maxAge(0)
                 .build()
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-            .body("logout success")
+            .body("Logged out")
     }
 
 }
