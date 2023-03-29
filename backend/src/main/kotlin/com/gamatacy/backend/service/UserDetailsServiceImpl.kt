@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class UserService: UserDetailsService {
+class UserDetailsServiceImpl: UserDetailsService {
 
     @Autowired
     private lateinit var userRepository: UserRepository

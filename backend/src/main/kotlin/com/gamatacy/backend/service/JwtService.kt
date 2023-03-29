@@ -1,6 +1,5 @@
 package com.gamatacy.backend.service
 
-import com.gamatacy.enum.UserRole
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import io.jsonwebtoken.Jwts

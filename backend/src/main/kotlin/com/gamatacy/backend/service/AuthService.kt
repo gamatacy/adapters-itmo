@@ -1,12 +1,16 @@
 package com.gamatacy.backend.service
 
-import com.gamatacy.backend.dto.RegistrationUserDto
+import com.gamatacy.backend.dto.*
 import com.gamatacy.backend.entity.UserEntity
 import com.gamatacy.backend.entity.repository.UserRepository
+import com.gamatacy.enum.UserRole
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import org.springframework.web.util.WebUtils
 
 @Service
 class AuthenticationService {
@@ -20,10 +24,21 @@ class AuthenticationService {
     fun register(user: RegistrationUserDto): ResponseEntity<Any> {
 
         if (userRepository.findByUsername(user.username) != null) {
-            return ResponseEntity.status(403).body(FailedAuthenticationResponseDto("Account with this username already exist"))
+            return ResponseEntity.status(403)
+                .body(FailedAuthenticationResponseDto("Account with this username already exist"))
         }
 
         val userEntity = UserEntity()
+
+        userEntity.username = user.username
+        userEntity.isuNumber = user.isuNumber
+        userEntity.firstName = user.firstName
+        userEntity.middleName = user.middleName
+        userEntity.lastName = user.lastName
+        userEntity.password = user.password
+        userEntity.email = user.email
+        userEntity.avatar = user.avatar
+        userEntity.role = setOf(UserRole.USER)
 
         val accessToken = jwtService.generateAccessToken(user.username)
         val refreshToken = jwtService.generateRefreshToken(user.username)
@@ -37,16 +52,18 @@ class AuthenticationService {
         return try {
             userRepository.save(userEntity)
             ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(AuthenticationResponseDto(accessToken))
+                .body(AccessTokenResponseDto(accessToken))
         } catch (e: Exception) {
-            ResponseEntity.status(403).body(FailedAuthenticationResponseDto("Server side problems"))
+            println(e.message)
+            ResponseEntity.status(403).body("Server side problems")
         }
     }
 
     fun login(user: LoginUserDto): ResponseEntity<Any> {
 
         val userEntity = userRepository.findByUsername(user.username)
-            ?: return ResponseEntity.status(403).body(FailedAuthenticationResponseDto("Account with this username doesn't exist"))
+            ?: return ResponseEntity.status(403)
+                .body(FailedAuthenticationResponseDto("Account with this username doesn't exist"))
 
         val accessToken = jwtService.generateAccessToken(user.username)
         val refreshToken = jwtService.generateRefreshToken(user.username)
@@ -57,9 +74,9 @@ class AuthenticationService {
                 .maxAge(60 * 60 * 24 * 7)
                 .build()
 
-        return if (userEntity.password.equals(PasswordEncoder.encodePassword(user.password))) {
+        return if (userEntity.password.equals(user.password)) {
             ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(AuthenticationResponseDto(accessToken))
+                .body(AuthenticationResponseDto("Logged in", accessToken))
         } else {
             ResponseEntity.status(403).body(FailedAuthenticationResponseDto("Wrong password"))
         }
@@ -76,21 +93,22 @@ class AuthenticationService {
                     .maxAge(60 * 60 * 24 * 7)
                     .build()
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(AuthenticationResponseDto(jwtService.generateAccessToken(jwtService.getUsername(oldCookie))))
+                .body(AccessTokenResponseDto(jwtService.generateAccessToken(jwtService.getUsername(oldCookie))))
         }
 
         return ResponseEntity.status(403).body("Token Expired")
 
     }
 
-    fun logout(request: HttpServletRequest): ResponseEntity<Any>{
+    fun logout(request: HttpServletRequest): ResponseEntity<Any> {
         val cookie =
             ResponseCookie.from("refreshToken", "")
                 .path("/api/auth/refresh")
                 .httpOnly(true)
                 .maxAge(0)
                 .build()
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString()).body(OkResponse("logout success"))
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
+            .body("logout success")
     }
 
 }

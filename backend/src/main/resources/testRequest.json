@@ -1,0 +1,10 @@
+{
+  "username":"test",
+  "firstName":"firstName",
+  "middleName":"middleName",
+  "lastName":"lastName",
+  "isuNumber":"333580",
+  "password":"password",
+  "email":"smth@mail.ru",
+  "avatar":"url"
+}

@@ -1,19 +1,24 @@
 package com.gamatacy.backend.entity
 
 import com.gamatacy.enum.UserRole
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 data class UserEntity(
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     val id: Long? = null,
-    val username: String? = null,
-    val isuNumber: Int? = null,
-    val firstName: String? = null,
-    val middleName: String? = null,
-    val lastName: String? = null,
-    val password: String? = null,
-    val email: String? = null,
-    val role: Set<UserRole>? = null
+    var username: String? = null,
+    var isuNumber: Int? = null,
+    var firstName: String? = null,
+    var middleName: String? = null,
+    var lastName: String? = null,
+    var password: String? = null,
+    var email: String? = null,
+
+    @ElementCollection(targetClass = UserRole::class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "userRoles")
+    @Enumerated(EnumType.STRING)
+    var role: Set<UserRole>? = null,
+    var avatar: String? = null
 )

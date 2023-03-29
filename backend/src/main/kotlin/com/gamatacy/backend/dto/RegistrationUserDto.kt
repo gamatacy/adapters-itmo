@@ -7,5 +7,6 @@ data class RegistrationUserDto(
     val middleName: String,
     val lastName: String,
     val password: String,
-    val email: String
+    val email: String,
+    val avatar: String
 )
