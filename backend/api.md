@@ -20,7 +20,7 @@
 }
 ```
 
-**Успешный ответ:**
+**Ответ:**
 ```json
 {
   "message" : "Successful registration",
@@ -49,7 +49,7 @@
 }
 ```
 
-**Успешный ответ:**
+**Ответ:**
 ```json
 {
   "message" : "Logged in",
@@ -70,7 +70,7 @@
 
 > GET : api/auth/refresh
 
-**Успешный ответ:**
+**Ответ:**
 ```json
 {
   "message" : "Token refreshed",
@@ -91,7 +91,7 @@
 
 > GET : api/auth/logout
 
-**Успешный ответ:**
+**Ответ:**
 ```json
 {
   "message" : "Logged out"
