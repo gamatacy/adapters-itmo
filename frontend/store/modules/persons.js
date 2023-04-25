@@ -1,3 +1,6 @@
+import { getPersons } from '../../mokk/persons'
+import { getPerson } from '../../mokk/person'
+
 let state = {}
 let getters = {}
 let mutations = {}
@@ -6,7 +9,10 @@ let actions = {}
 state = () => ({
   isLoading: true,
   person: null,
-  persons: []
+  persons: {
+    count: 0,
+    data: []
+  }
 })
 
 getters = {
@@ -28,13 +34,16 @@ mutations = {
 }
 
 actions = {
-  async getPerson (context, payload) {
+  getPerson (context, payload) {
     try {
       context.commit('setLoading', true)
-      const { data } = await this.$axios.get()
-      if (data.error_code === 0) {
-        context.commit('setPerson', data.result)
-      }
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setPerson', data.result)
+      // }
+      // context.commit('setPerson', data.result)
+      const data = getPerson()
+      context.commit('setPerson', data)
     } catch (e) {
       context.commit('setPerson', null)
     } finally {
@@ -42,15 +51,17 @@ actions = {
     }
   },
 
-  async getPersons (context, payload) {
+  getPersons (context, payload) {
     try {
-      context.commit('setLoading', true)
-      const { data } = await this.$axios.get()
-      if (data.error_code === 0) {
-        context.commit('setPersons', data.result)
-      }
+      // context.commit('setLoading', true)
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setPersons', data.result)
+      // }
+      const data = getPersons()
+      context.commit('setPersons', data)
     } catch (e) {
-      context.commit('setPersons', [])
+      context.commit('setPersons', { count: 0, data: [] })
     } finally {
       context.commit('setLoading', false)
     }

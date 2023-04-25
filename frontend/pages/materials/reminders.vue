@@ -25,10 +25,7 @@
             Изучить
           </b-button>
           <b-modal :id="'reminder'+i" size="lg" hide-footer :title="reminder.name">
-            <iframe
-              :src="reminder.path"
-              style="width:100%;border:none;aspect-ratio: 1.6"
-            />
+            <iframe :src="reminder.path" />
           </b-modal>
         </b-card>
       </b-col>
@@ -47,6 +44,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+iframe{
+  width:100%;
+  border:none;
+  height: calc(100vh - 160px);
+}
 </style>
