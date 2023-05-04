@@ -98,4 +98,60 @@
 }
 ```
 
-<br>
+<hr>
+<hr>
+
+## Информация о пользователях [ api/users ]
+
+### Получить пользователя по логину
+
+> GET : api/users/?username=test
+
+**Ответ:**
+```json
+{
+  "username" : "test",
+  "isuNumber" : "333580",
+  "firstName" :  "Oleg",
+  "middleName" : "Igorevich", 
+  "lastName" :  "Shipulin",
+  "email" : "oleg@mail.ru",
+  "avatar" : "url"
+}
+```
+
+**Если пользователь не найден - возвращает 404**
+
+<hr>
+
+### Получить пользователя по логину
+
+> GET : api/users/?username=test
+
+**Ответ:**
+```json
+  "data": [
+    {
+    "username": "john_smith",
+    "isuNumber": "12345",
+    "firstName": "John",
+    "middleName": "Doe",
+    "lastName": "Smith",
+    "email": "john.smith@example.com",
+    "avatar": "https://example.com/avatar.png"
+    },
+    {
+    "username": "jane_doe",
+    "isuNumber": "67890",
+    "firstName": "Jane",
+    "middleName": "Doe",
+    "lastName": "Smith",
+    "email": "jane.doe@example.com",
+    "avatar": "https://example.com/avatar.png"
+    }
+]
+
+```
+
+
+<hr>
