@@ -1,8 +1,28 @@
 <template>
-  <div>
+  <b-overlay :show="isLoading">
     <b-row>
       <b-col cols="12" lg="5">
-        {{ value }}
+        <div class="h5 my-3">
+          События {{ $dayjs(date).format('DD.MM.YY') }}
+        </div>
+        <template v-if="eventsByDate.length>0">
+          <div v-for="(event, i) in eventsByDate.slice(0,1)" :key="i">
+            <event-card :event="event" class="mb-2" />
+          </div>
+          <div class="d-flex justify-content-center">
+            <b-button
+              v-if="eventsByDate.length>1"
+              v-b-modal.events-by-date
+              variant="link"
+              class="shadow-none"
+            >
+              Смотреть все
+            </b-button>
+          </div>
+        </template>
+        <template v-else>
+          Событий в этот день нет
+        </template>
       </b-col>
       <b-col cols="12" lg="7">
         <b-row align-v="center" class="border rounded p-3">
@@ -11,13 +31,14 @@
           </b-button>
           <b-col>
             <div class="text-center h5 mb-3">
-              Календарь событий, {{ value }}
+              Календарь событий, {{ $dayjs(date).format('MMMM YYYY') }}
             </div>
             <b-calendar
-              v-model="value"
+              v-model="date"
               :hide-header="true"
               block
               locale="ru"
+              :date-info-fn="dateInfo"
             />
           </b-col>
           <b-button variant="white" class="shadow-none" @click="changeMonth(1)">
@@ -26,19 +47,61 @@
         </b-row>
       </b-col>
     </b-row>
-  </div>
+    <div class="h3 my-3">
+      Все события
+    </div>
+    <b-row>
+      <b-col v-for="(event, i) in events" :key="i" cols="12" lg="6" class="mb-3">
+        <event-card :event="event" />
+      </b-col>
+    </b-row>
+    <events-by-date-modal :events="eventsByDate" />
+    <template v-for="(event, i) in events">
+      <EventModal :key="i" :event="event" />
+    </template>
+  </b-overlay>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import EventCard from '../components/events/EventCard'
+import EventModal from '../components/events/EventModal'
+import EventsByDateModal from '../components/events/EventsByDateModal'
+
 export default {
   name: 'EventsPage',
-  data: () => ({
-    value: new Date()
-  }),
+
+  components: { EventModal, EventCard, EventsByDateModal },
+
+  data () {
+    return {
+      date: this.$dayjs().format()
+    }
+  },
+
+  computed: {
+    ...mapGetters('modules/events', ['isLoading', 'events', 'eventsByDates']),
+    datesEvent () {
+      return Object.keys(this.eventsByDates).map(eventDate => this.$dayjs(eventDate).format('DD.MM.YYYY'))
+    },
+    eventsByDate () {
+      return this.eventsByDates[this.$dayjs(this.date).format('YYYY-MM-DD')] || []
+    }
+  },
+
+  mounted () {
+    this.$store.dispatch('modules/events/getEvents')
+    this.$store.dispatch('modules/events/getEventsByDates')
+  },
+
   methods: {
     changeMonth (val) {
-      const date = new Date(this.value)
-      this.value = new Date(date.setMonth(date.getMonth() + val))
+      this.date = this.$dayjs(this.date).add(val, 'month').format()
+    },
+
+    dateInfo (ymd, date) {
+      if (this.datesEvent.includes(this.$dayjs(date).format('DD.MM.YYYY'))) { return 'date-info' }
+      return ''
     }
   }
 }
@@ -57,5 +120,17 @@ export default {
 .b-calendar-grid-weekdays {
   border-bottom: 0 !important;
   text-transform: capitalize;
+}
+
+.date-info:after{
+  content:'';
+  display: block;
+  background: var(--primary);
+  width: 7px;
+  height: 7px;
+  position: absolute;
+  top:0;
+  right:0;
+  border-radius: 50%;
 }
 </style>

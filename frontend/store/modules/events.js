@@ -1,3 +1,6 @@
+import { getEvents } from '../../mokk/events'
+import { getEventsByDates } from '../../mokk/eventsByDates'
+
 let state = {}
 let getters = {}
 let mutations = {}
@@ -5,12 +8,14 @@ let actions = {}
 
 state = () => ({
   isLoading: true,
-  events: []
+  events: [],
+  eventsByDates: {}
 })
 
 getters = {
   isLoading: state => state.isLoading,
-  events: state => state.events
+  events: state => state.events,
+  eventsByDates: state => state.eventsByDates
 }
 
 mutations = {
@@ -19,19 +24,40 @@ mutations = {
   },
   setEvents (state, payload) {
     state.events = payload
+  },
+  setEventsByDates (state, payload) {
+    state.eventsByDates = payload
   }
 }
 
 actions = {
-  async getEvents (context) {
+  getEvents (context) {
     try {
       context.commit('setLoading', true)
-      const { data } = await this.$axios.get()
-      if (data.error_code === 0) {
-        context.commit('setEvents', data.result)
-      }
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setEvents', data.result)
+      // }
+      const data = getEvents()
+      context.commit('setEvents', data)
     } catch (e) {
       context.commit('setEvents', [])
+    } finally {
+      context.commit('setLoading', false)
+    }
+  },
+
+  getEventsByDates (context) {
+    try {
+      context.commit('setLoading', true)
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setEvents', data.result)
+      // }
+      const data = getEventsByDates()
+      context.commit('setEventsByDates', data)
+    } catch (e) {
+      context.commit('setEventsByDates', [])
     } finally {
       context.commit('setLoading', false)
     }
