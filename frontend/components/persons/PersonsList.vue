@@ -2,8 +2,8 @@
   <b-overlay :show="isLoading" class="h-100">
     <div class="d-flex flex-column justify-content-between h-100">
       <div>
-        <b-row class="justify-content-center">
-          <b-col cols="8">
+        <b-row class="justify-content-center mt-2">
+          <b-col cols="10" lg="8">
             <b-input
               v-model="searchQuery"
               class="rounded-pill px-4"
@@ -19,7 +19,8 @@
             :key="person.id"
             cols="12"
             md="6"
-            xl="4"
+            lg="4"
+            xl="3"
             class="pb-3 col-xxl-3"
           >
             <person-card :person="person" />

@@ -41,7 +41,7 @@ export default {
 <style scoped>
 .person-photo{
   width: 100%;
-  max-width: 150px;
+  max-width: 120px;
   aspect-ratio: 1;
   object-fit: cover;
 }

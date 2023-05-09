@@ -6,7 +6,7 @@
           <span class="navbar-toggler-icon" />
         </b-button>
 
-        <b-navbar-brand href="/">
+        <b-navbar-brand>
           <img src="/images/logo.png" height="30" alt="Adapters logo">
         </b-navbar-brand>
 

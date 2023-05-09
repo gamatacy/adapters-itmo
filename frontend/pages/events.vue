@@ -9,7 +9,7 @@
           <div v-for="(event, i) in eventsByDate.slice(0,1)" :key="i">
             <event-card :event="event" class="mb-2" />
           </div>
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center mb-2">
             <b-button
               v-if="eventsByDate.length>1"
               v-b-modal.events-by-date
@@ -21,17 +21,36 @@
           </div>
         </template>
         <template v-else>
-          Событий в этот день нет
+          <div class="d-flex justify-content-center">
+            <img src="/images/404.svg" height="150" alt="404">
+          </div>
+          <div class="text-center my-2">
+            Событий в этот день нет
+          </div>
         </template>
       </b-col>
       <b-col cols="12" lg="7">
-        <b-row align-v="center" class="border rounded p-3">
-          <b-button variant="white" class="shadow-none" @click="changeMonth(-1)">
+        <b-row align-v="center" no-gutters class="border rounded p-3">
+          <b-button variant="white" class="shadow-none d-none d-lg-flex" @click="changeMonth(-1)">
             <b-icon icon="chevron-left" />
           </b-button>
           <b-col>
-            <div class="text-center h5 mb-3">
+            <div class="text-center h5 mb-3 d-none d-lg-block">
               Календарь событий, {{ $dayjs(date).format('MMMM YYYY') }}
+            </div>
+            <div class="d-lg-none">
+              <div class="text-center h5 mb-3">
+                Календарь событий
+              </div>
+              <div class="d-flex align-items-center justify-content-center">
+                <b-button variant="white" size="sm" class="shadow-none" @click="changeMonth(-1)">
+                  <b-icon icon="chevron-left" />
+                </b-button>
+                {{ $dayjs(date).format('MMMM YYYY') }}
+                <b-button variant="white" size="sm" class="shadow-none" @click="changeMonth(1)">
+                  <b-icon icon="chevron-right" />
+                </b-button>
+              </div>
             </div>
             <b-calendar
               v-model="date"
@@ -41,7 +60,7 @@
               :date-info-fn="dateInfo"
             />
           </b-col>
-          <b-button variant="white" class="shadow-none" @click="changeMonth(1)">
+          <b-button variant="white" class="shadow-none d-none d-lg-flex" @click="changeMonth(1)">
             <b-icon icon="chevron-right" />
           </b-button>
         </b-row>
