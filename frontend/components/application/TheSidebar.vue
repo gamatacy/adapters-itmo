@@ -6,7 +6,7 @@
     close-label="bg-light"
   >
     <template #header>
-      <img src="/images/logo.png" height="30" alt="Adapters logo">
+      <img src="/adapters/images/logo.png" height="30" alt="Adapters logo">
     </template>
 
     <div class="px-3 py-2">

@@ -53,7 +53,7 @@
       </div>
       <div v-else>
         <div class="d-flex justify-content-center">
-          <img src="/images/404.svg" height="150" alt="404">
+          <img src="/adapters/images/404.svg" height="150" alt="404">
         </div>
         <div class="text-center mt-2">
           Не найдено
@@ -97,7 +97,7 @@ export default {
       if (this.person.avatar) {
         return this.person.avatar
       } else {
-        return '/images/default-avatar.svg'
+        return '/adapters/images/default-avatar.svg'
       }
     },
     navigationEnabled () {

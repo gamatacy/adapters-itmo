@@ -31,7 +31,7 @@ export default {
       if (this.person.avatar) {
         return this.person.avatar
       } else {
-        return '/images/default-avatar.svg'
+        return '/adapters/images/default-avatar.svg'
       }
     }
   }

@@ -2,7 +2,7 @@
   <div class="error-container py-4">
     <div class="h-100 rounded bg-white d-flex align-items-center justify-content-center flex-column">
       <div>
-        <img src="/images/404.svg" height="175" alt="404">
+        <img src="/adapters/images/404.svg" height="175" alt="404">
       </div>
       <div class="mt-4 mb-3">
         Упс... Кажется, здесь ничего нет!<br>

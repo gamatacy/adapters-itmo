@@ -2,7 +2,7 @@
   <b-row align-v="center" class="justify-content-center h-100">
     <b-col cols="12" md="10" lg="8" xl="6">
       <div class="d-flex justify-content-center pb-3 my-4">
-        <img src="/images/logo.png" height="50" alt="Adapters logo">
+        <img src="/adapters/images/logo.png" height="50" alt="Adapters logo">
       </div>
       <b-form class="bg-white rounded py-4 px-4 px-lg-5 mb-4" novalidate @submit="submitForm">
         <div class="text-center text-primary h3 mb-4">

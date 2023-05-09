@@ -4,20 +4,20 @@ let getters = {}
 state = () => ({
   reminders: [{
     name: 'Электронные сервисы',
-    path: '/pdfs/Services.pdf',
-    photo: '/images/reminders/сервисы.png'
+    path: '/adapters/pdfs/Services.pdf',
+    photo: '/adapters/images/reminders/сервисы.png'
   }, {
     name: 'Стипендии',
-    path: '/pdfs/Stipend.pdf',
-    photo: '/images/reminders/стипендии.png'
+    path: '/adapters/pdfs/Stipend.pdf',
+    photo: '/adapters/images/reminders/стипендии.png'
   }, {
     name: 'Учебный процесс',
-    path: '/pdfs/Study_process.pdf',
-    photo: '/images/reminders/учебный.png'
+    path: '/adapters/pdfs/Study_process.pdf',
+    photo: '/adapters/images/reminders/учебный.png'
   }, {
     name: 'Переводы',
-    path: '/pdfs/Transfers.pdf',
-    photo: '/images/reminders/переводы.png'
+    path: '/adapters/pdfs/Transfers.pdf',
+    photo: '/adapters/images/reminders/переводы.png'
   }]
 })
 

@@ -22,7 +22,7 @@
         </template>
         <template v-else>
           <div class="d-flex justify-content-center">
-            <img src="/images/404.svg" height="150" alt="404">
+            <img src="/adapters/images/404.svg" height="150" alt="404">
           </div>
           <div class="text-center my-2">
             Событий в этот день нет
