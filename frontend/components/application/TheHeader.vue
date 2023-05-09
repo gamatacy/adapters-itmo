@@ -19,7 +19,7 @@
                 class="mx-3"
                 no-caret
                 right
-                :toggle-class="{active:navItem.items.find(item=>item.link===$route.path)}"
+                :toggle-class="{active:navItem.items.find(item=>$route.path.includes(item.link))}"
               >
                 <template #button-content>
                   {{ navItem.name }}

@@ -25,8 +25,36 @@
         </b-col>
       </b-row>
       <hr class="mb-2">
-      <div class="h4">
+      <div class="h4 mb-3">
         Достижения
+      </div>
+
+      <div v-if="person.achievements.length" :class="navigationEnabled?'px-3':'mx--1'">
+        <client-only>
+          <carousel v-bind="options" :navigation-enabled="navigationEnabled">
+            <slide v-for="(achievement,i) in person.achievements" :key="i" class="img-wrapper">
+              <b-card class="text-center h-100 mx-2">
+                <div class="d-flex flex-column justify-content-between h-100">
+                  <div class="h6">
+                    Пройден
+                    {{ achievement.name }}
+                  </div>
+                  <div>
+                    {{ $dayjs(achievement.date).format('DD.MM.YYYY') }}
+                  </div>
+                </div>
+              </b-card>
+            </slide>
+          </carousel>
+        </client-only>
+      </div>
+      <div v-else>
+        <div class="d-flex justify-content-center">
+          <img src="/images/404.svg" height="150" alt="404">
+        </div>
+        <div class="text-center mt-2">
+          Не найдено
+        </div>
       </div>
     </div>
   </b-overlay>
@@ -47,6 +75,20 @@ export default {
     }
   },
 
+  data () {
+    return {
+      options: {
+        loop: true,
+        perPage: 5,
+        perPageCustom: [[0, 1], [1024, 4]],
+        paginationActiveColor: 'var(--primary)',
+        paginationEnabled: false,
+        navigationPrevLabel: '<svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="chevron left" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-chevron-left b-icon bi"><g><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></g></svg>',
+        navigationNextLabel: '<svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="chevron right" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-chevron-right b-icon bi"><g><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path></g></svg>'
+      }
+    }
+  },
+
   computed: {
     photoHandler () {
       if (this.person.avatar) {
@@ -54,11 +96,20 @@ export default {
       } else {
         return '/images/default-avatar.svg'
       }
+    },
+    navigationEnabled () {
+      return window.innerWidth >= 1024 && this.person.achievements.length > 3
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+.VueCarousel-navigation-button{
+  border-radius: 10px;
+}
+.mx--1{
+  margin-right: -8px;
+  margin-left: -8px;
+}
 </style>
