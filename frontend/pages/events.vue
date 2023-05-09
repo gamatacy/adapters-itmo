@@ -2,7 +2,7 @@
   <b-overlay :show="isLoading">
     <b-row>
       <b-col cols="12" lg="5">
-        <div class="h5 my-3">
+        <div class="h5 mb-3">
           События {{ $dayjs(date).format('DD.MM.YY') }}
         </div>
         <template v-if="eventsByDate.length>0">

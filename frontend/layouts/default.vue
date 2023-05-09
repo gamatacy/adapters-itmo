@@ -3,7 +3,7 @@
     <TheHeader />
     <TheSidebar />
     <b-container class="py-3 px-2 px-lg-0">
-      <div class="bg-white rounded p-2 px-3 p-lg-4 px-lg-5" style="min-height: calc(100vh - 100px)">
+      <div class="bg-white rounded p-3 p-lg-4 px-lg-5" style="min-height: calc(100vh - 100px)">
         <Nuxt />
       </div>
     </b-container>

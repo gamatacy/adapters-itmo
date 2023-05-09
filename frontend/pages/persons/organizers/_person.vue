@@ -31,8 +31,5 @@ export default {
 </script>
 
 <style scoped>
-.profile-photo{
-  width: 100%;
-  max-width: 250px;
-}
+
 </style>

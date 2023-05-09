@@ -143,7 +143,7 @@ export default {
         return
       }
       this.loading = true
-      //
+      this.$router.push('/events')
       this.loading = false
     }
   }

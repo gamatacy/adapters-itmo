@@ -32,12 +32,12 @@
           </b-form-invalid-feedback>
         </div>
 
-        <div>
-          Забыли пароль?
-          <nuxt-link to="/recovery">
-            Восстановить
-          </nuxt-link>
-        </div>
+        <!--        <div>-->
+        <!--          Забыли пароль?-->
+        <!--          <nuxt-link to="/recovery">-->
+        <!--            Восстановить-->
+        <!--          </nuxt-link>-->
+        <!--        </div>-->
         <div class="d-flex justify-content-center mt-4">
           <b-button type="submit" variant="primary" :disabled="loading">
             Вход
@@ -86,7 +86,7 @@ export default {
         return
       }
       this.loading = true
-      //
+      this.$router.push('/events')
       this.loading = false
     }
   }

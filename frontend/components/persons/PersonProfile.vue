@@ -2,15 +2,15 @@
   <b-overlay :show="isLoading" class="h-100">
     <div v-if="person">
       <b-row>
-        <b-col cols="12" lg="auto">
+        <b-col cols="12" lg="auto" class="d-flex justify-content-center d-lg-block">
           <img :src="photoHandler" alt="photo" class="profile-photo rounded">
         </b-col>
-        <b-col cols="12" lg>
-          <div class="d-flex align-items-end mb-2">
+        <b-col cols="12" lg class="text-center text-lg-left">
+          <div class="d-lg-flex align-items-end mb-2">
             <div class="h4 mb-0">
               {{ person.name }}
             </div>
-            <div class="border-left pl-2 ml-2 text-secondary">
+            <div class="profile-isu pl-2 ml-2 text-secondary">
               {{ person.isuNumber }}
             </div>
           </div>
@@ -22,6 +22,9 @@
           <b-badge v-for="(hobby,i) in person.hobbies" :key="i" class="mr-2 mt-2">
             {{ hobby }}
           </b-badge>
+          <div class="profile-logout">
+            <slot name="logout" />
+          </div>
         </b-col>
       </b-row>
       <hr class="mb-2">
@@ -80,7 +83,7 @@ export default {
       options: {
         loop: true,
         perPage: 5,
-        perPageCustom: [[0, 1], [1024, 4]],
+        perPageCustom: [[0, 1], [992, 4]],
         paginationActiveColor: 'var(--primary)',
         paginationEnabled: false,
         navigationPrevLabel: '<svg viewBox="0 0 16 16" width="1em" height="1em" focusable="false" role="img" aria-label="chevron left" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-chevron-left b-icon bi"><g><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></g></svg>',
@@ -98,13 +101,34 @@ export default {
       }
     },
     navigationEnabled () {
-      return window.innerWidth >= 1024 && this.person.achievements.length > 3
+      return window.innerWidth >= 992 && this.person.achievements.length > 3
     }
   }
 }
 </script>
 
 <style lang="scss">
+.profile-photo{
+  width: 100%;
+  max-width: 150px;
+
+  @media (min-width: 992px) {
+    max-width: 250px;
+  }
+}
+
+.profile-isu{
+  @media (min-width: 992px) {
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.profile-logout{
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
 .VueCarousel-navigation-button{
   border-radius: 10px;
 }
