@@ -27,6 +27,8 @@ class WebSecurityConfig {
             .and()
             .authorizeHttpRequests()
             .requestMatchers("api/auth").permitAll()
+            .requestMatchers("api/users").permitAll()
+            .requestMatchers("api/events").permitAll()
             .requestMatchers("api/adminUrls").hasAuthority(UserRole.ADMIN.toString())
             .anyRequest().permitAll()
             .and()

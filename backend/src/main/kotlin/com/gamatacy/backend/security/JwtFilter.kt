@@ -1,7 +1,7 @@
 package com.gamatacy.backend.security
 
 import com.gamatacy.backend.service.JwtService
-import com.gamatacy.backend.service.UserService
+import com.gamatacy.backend.service.UserDetailsServiceImpl
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -19,7 +19,7 @@ class JwtFilter: OncePerRequestFilter() {
     private lateinit var jwtService: JwtService
 
     @Autowired
-    private lateinit var userService: UserService
+    private lateinit var userService: UserDetailsServiceImpl
 
     override fun doFilterInternal(
         request: HttpServletRequest,

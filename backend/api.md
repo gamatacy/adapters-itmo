@@ -93,9 +93,7 @@
 
 **Ответ:**
 ```json
-{
-  "message" : "Logged out"
-}
+Logged out
 ```
 
 <hr>
@@ -105,7 +103,7 @@
 
 ### Получить пользователя по логину
 
-> GET : api/users/?username=test
+> GET : api/users/test
 
 **Ответ:**
 ```json
@@ -124,34 +122,80 @@
 
 <hr>
 
-### Получить пользователя по логину
+### Получить пользователей
 
-> GET : api/users/?username=test
+> GET : api/users/page/1
 
 **Ответ:**
 ```json
-  "data": [
-    {
-    "username": "john_smith",
-    "isuNumber": "12345",
-    "firstName": "John",
-    "middleName": "Doe",
-    "lastName": "Smith",
-    "email": "john.smith@example.com",
-    "avatar": "https://example.com/avatar.png"
-    },
-    {
-    "username": "jane_doe",
-    "isuNumber": "67890",
-    "firstName": "Jane",
-    "middleName": "Doe",
-    "lastName": "Smith",
-    "email": "jane.doe@example.com",
-    "avatar": "https://example.com/avatar.png"
-    }
+ [
+  {
+    "username": "test",
+    "isuNumber": 333580,
+    "firstName": "имя_пользователя",
+    "middleName": "фамилия_пользователя",
+    "lastName": "отчество_пользователя",
+    "email": "почта",
+    "avatar": "ссылка_на_картинку"
+  },
+  {
+    "username": "test1",
+    "isuNumber": 333580,
+    "firstName": "имя_пользователя",
+    "middleName": "фамилия_пользователя",
+    "lastName": "отчество_пользователя",
+    "email": "почта",
+    "avatar": "ссылка_на_картинку"
+  }
 ]
 
 ```
 
+## Мероприятия[ api/users ]
 
 <hr>
+
+### Добавить мероприятие
+
+> POST : api/events/addEvent
+
+**Параметры запроса**
+```json
+{
+  "name" : "test",
+  "date" : "2022-03-06 22:00:00",
+  "description" : "test event"
+}
+```
+
+**Ответ**
+```json
+Event added
+```
+
+<hr>
+
+### Получить мероприятия
+
+> GET : api/events/getEvent/{date}
+
+**date - "yyyy-MM-dd"**
+
+**Ответ**
+```json
+[
+    {
+        "id": 1,
+        "name": "test",
+        "description": "test event",
+        "date": "2022-03-06 21:00:00",
+        "visitors": null,
+        "year": 2022,
+        "month": 3
+    }
+]
+```
+**Ошибка:**
+```json
+Wrong date format
+```
