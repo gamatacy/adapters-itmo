@@ -23,7 +23,7 @@
         <b-form-invalid-feedback :state="!isTouchedBtn || !!form.places.length">
           Обязательно
         </b-form-invalid-feedback>
-        <b-row v-for="(_, i) in form.places" :key="i" no-gutters class="d-flex mt-2">
+        <b-row v-for="(_, i) in form.places" :key="'place-'+i" no-gutters class="d-flex mt-2">
           <b-col col>
             <b-form-input
               v-model="form.places[i]"
