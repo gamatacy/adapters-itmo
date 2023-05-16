@@ -86,6 +86,7 @@ export default {
         return
       }
       this.loading = true
+      this.$store.dispatch('modules/user/login', this.form)
       this.$router.push('/events')
       this.loading = false
     }

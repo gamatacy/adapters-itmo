@@ -32,6 +32,12 @@ export const getEventsForAdmin = () => ([
       date: '2023-05-05T09:56:23+03:00',
       place: 'пр. Кронверкский, 49',
       visited: 0
+    }, {
+      isuNumber: 336750,
+      name: 'Олейников Владимир',
+      date: '2023-05-05T09:56:23+03:00',
+      place: 'пр. Кронверкский, 49',
+      visited: 1
     }]
   }, {
     id: 2,

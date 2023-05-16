@@ -1,5 +1,5 @@
-import { getEvents } from '../../mokk/events'
-import { getEventsByDates } from '../../mokk/eventsByDates'
+import { getEvents, getEventsForAdmin } from '../../mokk/events'
+import { getEventsByDates, getEventsByDatesAdmin } from '../../mokk/eventsByDates'
 
 let state = {}
 let getters = {}
@@ -38,7 +38,12 @@ actions = {
       // if (data.error_code === 0) {
       //   context.commit('setEvents', data.result)
       // }
-      const data = getEvents()
+      let data = null
+      if (context.rootGetters['modules/user/isAdmin']) {
+        data = getEventsForAdmin()
+      } else {
+        data = getEvents()
+      }
       context.commit('setEvents', data)
     } catch (e) {
       context.commit('setEvents', [])
@@ -54,7 +59,12 @@ actions = {
       // if (data.error_code === 0) {
       //   context.commit('setEvents', data.result)
       // }
-      const data = getEventsByDates()
+      let data = null
+      if (context.rootGetters['modules/user/isAdmin']) {
+        data = getEventsByDatesAdmin()
+      } else {
+        data = getEventsByDates()
+      }
       context.commit('setEventsByDates', data)
     } catch (e) {
       context.commit('setEventsByDates', [])

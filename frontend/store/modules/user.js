@@ -1,3 +1,5 @@
+import { getPerson, getPersonAdmin } from '../../mokk/person'
+
 let state = {}
 let getters = {}
 let mutations = {}
@@ -10,6 +12,7 @@ state = () => ({
 
 getters = {
   isLoading: state => state.isLoading,
+  isAdmin: state => state.user?.admin,
   user: state => state.user
 }
 
@@ -23,11 +26,25 @@ mutations = {
 }
 
 actions = {
-  async login (context) {
+  login (context, payload) {
+    try {
+      context.commit('setLoading', true)
+      let data = null
+      if (payload.email === 'admin') {
+        data = getPersonAdmin()
+      } else {
+        data = getPerson()
+      }
+      context.commit('setUser', data)
+    } catch (e) {
+      context.commit('setUser', null)
+    } finally {
+      context.commit('setLoading', false)
+    }
   },
-  async logout (context) {
-  },
-  async changeUser (context) {
+
+  logout (context) {
+    context.commit('setUser', null)
   }
 }
 

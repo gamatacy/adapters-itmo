@@ -66,18 +66,29 @@
         </b-row>
       </b-col>
     </b-row>
-    <div class="h3 my-3">
-      Все события
+
+    <div class="d-flex align-items-center">
+      <div class="h3 my-3">
+        Все события
+      </div>
+      <b-button v-if="isAdmin" v-b-modal.event-add-modal variant="link" size="lg" class="shadow-none">
+        + Добавить новое
+      </b-button>
     </div>
     <b-row>
       <b-col v-for="(event, i) in events" :key="i" cols="12" lg="6" class="mb-3">
         <event-card :event="event" />
       </b-col>
     </b-row>
+
     <events-by-date-modal :events="eventsByDate" />
-    <template v-for="(event, i) in events">
-      <EventModal :key="i" :event="event" />
+    <template v-if="isAdmin">
+      <EventModalAdmin v-for="(event, i) in events" :key="i" :event="event" />
     </template>
+    <template v-else>
+      <EventModal v-for="(event, i) in events" :key="i" :event="event" />
+    </template>
+    <event-add-modal />
   </b-overlay>
 </template>
 
@@ -86,11 +97,13 @@ import { mapGetters } from 'vuex'
 import EventCard from '../components/events/EventCard'
 import EventModal from '../components/events/EventModal'
 import EventsByDateModal from '../components/events/EventsByDateModal'
+import EventAddModal from '../components/events/EventAddModal'
+import EventModalAdmin from '../components/events/EventModalAdmin'
 
 export default {
   name: 'EventsPage',
 
-  components: { EventModal, EventCard, EventsByDateModal },
+  components: { EventModalAdmin, EventAddModal, EventModal, EventCard, EventsByDateModal },
 
   data () {
     return {
@@ -99,6 +112,7 @@ export default {
   },
 
   computed: {
+    ...mapGetters('modules/user', ['isAdmin']),
     ...mapGetters('modules/events', ['isLoading', 'events', 'eventsByDates']),
     datesEvent () {
       return Object.keys(this.eventsByDates).map(eventDate => this.$dayjs(eventDate).format('DD.MM.YYYY'))

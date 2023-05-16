@@ -22,7 +22,12 @@
           </b-badge>
         </template>
       </div>
-      <div>
+      <div v-if="isAdmin" class="d-flex justify-content-center mt-3">
+        <b-button v-b-modal="'event-admin-'+event.id" variant="primary">
+          Отметить посещение
+        </b-button>
+      </div>
+      <div v-else>
         <div v-if="event.signed===null" class="d-flex justify-content-center mt-3">
           <b-button v-b-modal="'event-'+event.id" variant="primary">
             Записаться
@@ -37,6 +42,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'EventCard',
 
@@ -45,7 +52,9 @@ export default {
       type: Object,
       default: () => ({})
     }
-  }
+  },
+
+  computed: { ...mapGetters('modules/user', ['isAdmin']) }
 }
 </script>
 
