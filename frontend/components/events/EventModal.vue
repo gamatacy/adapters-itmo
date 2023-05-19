@@ -65,7 +65,9 @@ export default {
   }),
 
   methods: {
-    signToEvent () {},
+    signToEvent () {
+      this.$bvModal.hide('event-' + this.event.id)
+    },
 
     showModal () {
       this.form.place = null
