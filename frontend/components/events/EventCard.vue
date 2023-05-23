@@ -5,7 +5,7 @@
         <div class="h4">
           {{ event.name }}
         </div>
-        <template v-if="event.signed===null">
+        <template v-if="event.signed===null || isAdmin">
           <div>
             {{ event.places.join(', ') }}
           </div>

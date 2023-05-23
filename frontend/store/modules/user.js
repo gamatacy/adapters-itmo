@@ -1,4 +1,4 @@
-import { getPerson, getPersonAdmin } from '../../mokk/person'
+import { getPersonAdmin, getUser } from '../../mokk/person'
 
 let state = {}
 let getters = {}
@@ -33,7 +33,7 @@ actions = {
       if (payload.email === 'admin') {
         data = getPersonAdmin()
       } else {
-        data = getPerson()
+        data = getUser()
       }
       context.commit('setUser', data)
     } catch (e) {
@@ -45,6 +45,18 @@ actions = {
 
   logout (context) {
     context.commit('setUser', null)
+  },
+
+  getUserInfo (context) {
+    try {
+      context.commit('setLoading', true)
+      const data = getUser()
+      context.commit('setUser', data)
+    } catch (e) {
+      context.commit('setUser', null)
+    } finally {
+      context.commit('setLoading', false)
+    }
   }
 }
 

@@ -1,5 +1,22 @@
-export const getPerson = () => ({
+export const getUser = () => ({
   name: 'Елизавета Хорошилова',
+  isuNumber: '123456',
+  email: 'elizaveta.good@yandex.ru',
+  avatar: null,
+  admin: false,
+  achievements: [
+    { name: 'Тренинг «Знакомство»', date: '2023-05-05' },
+    { name: 'Тренинг «Командообразование»', date: '2023-06-05' },
+    { name: 'Тренинг «Лидерство»', date: '2023-05-06' },
+    { name: 'Тест «Стипендии»', date: '2023-05-06' },
+    { name: 'Тест «Учебный процесс»', date: '2023-05-05' },
+    { name: 'Тест «Переводы»', date: '2023-06-05' }
+  ],
+  hobbies: ['Стрип-пластика', 'Микроблоггинг', 'Программирование на C++', 'Йога', 'Астрология']
+})
+
+export const getPerson = () => ({
+  name: 'Олейникова Полина',
   isuNumber: '123456',
   email: 'oleynikova.poly@yandex.ru',
   avatar: null,

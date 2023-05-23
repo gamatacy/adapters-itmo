@@ -1,3 +1,5 @@
+import { getTest, getTests } from '../../mokk/tests'
+
 let state = {}
 let getters = {}
 let mutations = {}
@@ -28,13 +30,15 @@ mutations = {
 }
 
 actions = {
-  async getTest (context, payload) {
+  getTest (context, payload) {
     try {
       context.commit('setLoading', true)
-      const { data } = await this.$axios.get()
-      if (data.error_code === 0) {
-        context.commit('setTest', data.result)
-      }
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setTest', data.result)
+      // }
+      const data = getTest()
+      context.commit('setTest', data)
     } catch (e) {
       context.commit('setTest', null)
     } finally {
@@ -42,13 +46,15 @@ actions = {
     }
   },
 
-  async getTests (context) {
+  getTests (context) {
     try {
       context.commit('setLoading', true)
-      const { data } = await this.$axios.get()
-      if (data.error_code === 0) {
-        context.commit('setTests', data.result)
-      }
+      // const { data } = await this.$axios.get()
+      // if (data.error_code === 0) {
+      //   context.commit('setTests', data.result)
+      // }
+      const data = getTests()
+      context.commit('setTests', data)
     } catch (e) {
       context.commit('setTests', [])
     } finally {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <person-profile :is-loading="isLoading" :person="person">
+    <person-profile :is-loading="isLoading" :person="user">
       <template #logout>
         <b-button variant="white" class="shadow-none d-none d-lg-flex" @click="logout">
           <b-icon icon="box-arrow-right" />
@@ -25,11 +25,11 @@ export default {
   components: { PersonProfile },
 
   computed: {
-    ...mapGetters('modules/persons', ['isLoading', 'person'])
+    ...mapGetters('modules/user', ['isLoading', 'user'])
   },
 
   async mounted () {
-    await this.$store.dispatch('modules/persons/getPerson', this.$route.params.person)
+    await this.$store.dispatch('modules/user/getUserInfo')
   },
 
   methods: {
